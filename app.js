@@ -41,6 +41,25 @@ app.get("/api/v1/products", async (req, res) => {
   });
 });
 
+// updating the data
+
+app.put("/api/v1/product/:id", async (req, res) => {
+  let updateProduct = await products.findById(req.body.id);
+
+  updateProduct = await products.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    useFindAndModify: true,
+    runValidators: true,
+  });
+
+  res.status(200).
+    json({
+      status: true,
+      updateProduct,
+    });
+});
+
+
 app.listen(4000, () => {
   console.log("server is running");
 });
