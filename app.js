@@ -31,6 +31,16 @@ app.post("/api/v1/product/new", async (req, res) => {
   });
 });
 
+// getting data
+
+app.get("/api/v1/products", async (req, res) => {
+  const getProducts = await products.find();
+  res.status(200).json({
+    status: 200,
+    getProducts,
+  });
+});
+
 app.listen(4000, () => {
   console.log("server is running");
 });
