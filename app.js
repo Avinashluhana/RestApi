@@ -31,7 +31,7 @@ app.post("/api/v1/product/new", async (req, res) => {
   });
 });
 
-// getting data
+// getting product data
 
 app.get("/api/v1/products", async (req, res) => {
   const getProducts = await products.find();
@@ -41,7 +41,7 @@ app.get("/api/v1/products", async (req, res) => {
   });
 });
 
-// updating the data
+// updating the product data
 
 app.put("/api/v1/product/:id", async (req, res) => {
   let updateProduct = await products.findById(req.body.id);
@@ -52,13 +52,13 @@ app.put("/api/v1/product/:id", async (req, res) => {
     runValidators: true,
   });
 
-  res.status(200).json({
+  res.status(200).json({    
     status: true,
     updateProduct,
   });
 });
 
-// deleting the product
+// deleting the product data
 
 app.delete("/api/v1/product/:id", async (req, res) => {
   const deleteProduct = await products.findById(req.params.id);
