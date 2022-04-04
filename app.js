@@ -52,13 +52,31 @@ app.put("/api/v1/product/:id", async (req, res) => {
     runValidators: true,
   });
 
-  res.status(200).
-    json({
-      status: true,
-      updateProduct,
-    });
+  res.status(200).json({
+    status: true,
+    updateProduct,
+  });
 });
 
+// deleting the product
+
+app.delete("/api/v1/product/:id", async (req, res) => {
+  const deleteProduct = await products.findById(req.params.id);
+
+  if (!deleteProduct) {
+    return res.status(500).json({
+      status: false,
+      message: "product not found",
+    });
+  }
+
+  await deleteProduct.remove();
+
+  res.status(200).json({
+    status: true,
+    message: "product has been deleted",
+  });
+});
 
 app.listen(4000, () => {
   console.log("server is running");
